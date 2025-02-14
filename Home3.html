@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Music Playlist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+            .navbar {
+            background: transparent !important;
+            position: absolute;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white !important;
+        }
+        .navbar .nav-link {
+            font-size: 1.1rem;
+            color: white !important;
+            margin-left: 20px;
+        }
+        .navbar .nav-link:hover {
+            color: #ffc107 !important;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .hero {
+            background: url('https://img.freepik.com/free-vector/party-crowd-with-lights-background_1048-12025.jpg?t=st=1739554865~exp=1739558465~hmac=6f22a443b1b70a9888dd8677047ef16f5a5cdbb7bacede5152beea34c1f92e23&w=996') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .hero .btn {
+            font-size: 1.2rem;
+            padding: 10px 30px;
+            border-radius: 25px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        /* Features Section */
+        #features {
+            background-color: #ffffff;
+            padding: 80px 20px;
+        }
+        .features .feature-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .features .feature-img:hover {
+            transform: scale(1.05);
+        }
+        .features h4 {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+        .features p {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+
+        /* About Section */
+        #about {
+            background-color: #f8f9fa;
+            padding: 80px 20px;
+        }
+        .about p {
+            font-size: 1.2rem;
+            color: #6c757d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Services Section */
+        #services {
+            background-color: #ffffff;
+            padding: 80px 20px;
+        }
+        .services h5 {
+            font-size: 1.3rem;
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+        .services p {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+
+        /* Trending Playlists Section */
+        #trending {
+            background-color: #e9ecef;
+            padding: 80px 20px;
+        }
+        .trending .playlist-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .trending .playlist-img:hover {
+            transform: scale(1.05);
+        }
+        .trending h4 {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+        .trending p {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+
+        /* Popular Artists Section */
+        #artists {
+            background-color: #ffffff;
+            padding: 80px 20px;
+        }
+        .artists .artist-img {
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+        }
+        .artists .artist-img:hover {
+            transform: scale(1.1);
+        }
+        .artists h4 {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+
+        /* Reviews Section */
+        #reviews {
+            background-color: #f8f9fa;
+            padding: 80px 20px;
+        }
+        .review-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .review-card p {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+        .review-card h5 {
+            font-size: 1.2rem;
+            color: #343a40;
+            margin-top: 15px;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: #ffffff;
+            padding: 80px 20px;
+        }
+        .contact p {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        /* Footer */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 60px 20px;
+        }
+        .footer h5 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ffc107;
+        }
+        .footer p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: #ffc107;
+        }
+        .footer .social-icons {
+            margin-top: 20px;
+        }
+        .footer .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        .footer .social-icons a:hover {
+            color: #ffc107;
+        }
+        .footer .newsletter {
+            margin-top: 30px;
+        }
+        .footer .newsletter input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .footer .newsletter button {
+            width: 100%;
+            padding: 10px;
+            background: #ffc107;
+            border: none;
+            border-radius: 5px;
+            color: #222;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .footer .newsletter button:hover {
+            background: #e0a800;
+        }
+        .footer .footer-links {
+            margin-top: 30px;
+        }
+        .footer .footer-links a {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Music Collab</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#trending">Trending</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#artists">Artists</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Collaborative Music Playlist Creation</h1>
+        <p>Create and share playlists with friends in real time. Experience music like never before!</p>
+        <a href="#" class="btn btn-warning">Get Started</a>
+    </header>
+    
+    <!-- Features Section -->
+    <section id="features" class="features container text-center">
+        <h2 class="section-title">Features</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-photo/drummer-plays-drums-blue-wall_169016-5569.jpg?t=st=1739554803~exp=1739558403~hmac=349d06c7ff6d0b53aa7b47369ea5bc56da091933b0535b68520f045ea56b1f19&w=1380" class="feature-img" alt="Feature">
+                <h4>Real-time Collaboration</h4>
+                <p>Add and edit playlists with friends in real-time. Perfect for parties, road trips, and more!</p>
+            </div>
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-photo/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night-copy-space_637285-559.jpg?t=st=1739554692~exp=1739558292~hmac=a47804bb74713b5737c6fbbf33c535704c6510954df47fe1ffc7c0a43c935b5d&w=996" class="feature-img" alt="Feature">
+                <h4>Music Integration</h4>
+                <p>Seamlessly connect with Spotify, Apple Music, and other platforms to access your favorite tunes.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-photo/back-view-crowd-fans-watching-live-performance-music-concert-night-copy-space_637285-544.jpg?t=st=1739554546~exp=1739558146~hmac=03c56828be7d69354b7fe114cca46ff187cec5aced2ec93ef7f503a57f2cf16e&w=1380" class="feature-img" alt="Feature">
+                <h4>AI Song Suggestions</h4>
+                <p>Get smart recommendations based on your listening habits and preferences.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="about container text-center">
+        <h2 class="section-title">About Us</h2>
+        <p>Our platform is designed for music lovers who want to build and share collaborative playlists with ease. Whether you're planning a party, a workout session, or just relaxing at home, Music Collab makes it easy to create the perfect playlist with your friends.</p>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="services container text-center">
+        <h2 class="section-title">Our Services</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Create Playlists</h5>
+                <p>Easily create and manage playlists with a simple and intuitive interface.</p>
+            </div>
+            <div class="col-md-3">
+                <h5>Share with Friends</h5>
+                <p>Invite friends to collaborate on playlists and share your favorite music.</p>
+            </div>
+            <div class="col-md-3">
+                <h5>Vote on Songs</h5>
+                <p>Let everyone have a say by voting on which songs make the cut.</p>
+            </div>
+            <div class="col-md-3">
+                <h5>Discover New Music</h5>
+                <p>Explore new music based on recommendations from friends and AI.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trending Playlists Section -->
+    <section id="trending" class="trending container text-center">
+        <h2 class="section-title">Trending Playlists</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-photo/medium-shot-contemplative-man-seaside_23-2150531616.jpg?t=st=1739556160~exp=1739559760~hmac=e5501e5a81a178f4142db1288647f461d65821f75be63a2152ae80f9f4cf32ba&w=996" class="playlist-img" alt="Chill Vibes">
+                <h4>Chill Vibes</h4>
+                <p>Curated by John Doe</p>
+            </div>
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-vector/party-background-with-golden-lights_1048-44.jpg?t=st=1739556210~exp=1739559810~hmac=e41fb73db5f45383b6b31965179a1c6278ded10eba613456c3396311fa47b108&w=740" class="playlist-img" alt="Party Hits">
+                <h4>Party Hits</h4>
+                <p>Curated by Jane Doe</p>
+            </div>
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-vector/silhouette-party-crowd_1048-5817.jpg?t=st=1739556465~exp=1739560065~hmac=93fdf0ef5889aca28dfadcc0ed81eaf5c0a707379143c11b58a82a7df776e7cb&w=740" class="playlist-img" alt="Rock Classics">
+                <h4>Rock Classics</h4>
+                <p>Curated by Alex Smith</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Popular Artists Section -->
+    <section id="artists" class="artists container text-center">
+        <h2 class="section-title">Popular Artists</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <img src="https://img.freepik.com/free-psd/saturday-night-party-social-media-instagram-template_505751-3745.jpg?ga=GA1.1.951709935.1739553699&semt=ais_hybrid" class="artist-img" alt="Artist 1">
+                <h4>Liam Nova</h4>
+            </div>
+            <div class="col-md-3">
+                <img src="https://img.freepik.com/free-vector/night-party-music-banner-social-media-template_17005-1357.jpg?ga=GA1.1.951709935.1739553699&semt=ais_hybrid" class="artist-img" alt="Artist 2">
+                <h4>Elena Skye</h4>
+            </div>
+            <div class="col-md-3">
+                <img src="https://img.freepik.com/free-psd/club-dj-party-flyer-social-media-post_505751-4127.jpg?t=st=1739556291~exp=1739559891~hmac=8768b2f5d084521a377b68dd0060d022276844bb84ec431e1eda74a7182fc482&w=740" class="artist-img" alt="Artist 3">
+                <h4>Maya Rivers </h4>
+            </div>
+            <div class="col-md-3">
+                <img src="https://img.freepik.com/free-psd/club-dj-party-flyer-social-media-post_505751-3058.jpg?t=st=1739556343~exp=1739559943~hmac=b1c2533560f59ca44dda328de63021e60dcb9bd9c761528dccec4d9563911d3b&w=740" class="artist-img" alt="Artist 4">
+                <h4>Zara Blaze</h4>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews container text-center">
+        <h2 class="section-title">What Our Users Say</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="review-card">
+                    <p>"This is the best way to discover and share music!"</p>
+                    <h5>- Music Lover</h5>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="review-card">
+                    <p>"I love how easy it is to collaborate with friends on playlists."</p>
+                    <h5>- Playlist Enthusiast</h5>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="review-card">
+                    <p>"The AI suggestions are spot on. I've discovered so many new songs!"</p>
+                    <h5>- Tech Geek</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact container text-center">
+        <h2 class="section-title">Contact Us</h2>
+        <p>Have questions or need support? Reach out to us!</p>
+        <p>Email: info@musiccollab.com | Phone: +123 456 7890</p>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Music Collab</h5>
+                    <p>Music Collab is a platform for music lovers to create, share, and discover playlists collaboratively. Join us and experience the joy of music together!</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <div class="footer-links">
+                        <a href="#features">Features</a>
+                        <a href="#trending">Trending Playlists</a>
+                        <a href="#artists">Popular Artists</a>
+                        <a href="#reviews">Reviews</a>
+                        <a href="#contact">Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Subscribe to Our Newsletter</h5>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Enter your email">
+                        <button>Subscribe</button>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center mt-4">
+                <div class="col">
+                    <p>&copy; 2025 Music Collab. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for social icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
